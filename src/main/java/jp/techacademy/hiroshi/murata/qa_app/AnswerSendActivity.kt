@@ -2,7 +2,6 @@ package jp.techacademy.hiroshi.murata.qa_app
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.preference.PreferenceManager
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -15,9 +14,10 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_answer_send.*
 
 class AnswerSendActivity : AppCompatActivity(), View.OnClickListener, DatabaseReference.CompletionListener{
+
     private lateinit var mQuestion: Question
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer_send)
 

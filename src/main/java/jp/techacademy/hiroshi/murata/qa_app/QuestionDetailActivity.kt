@@ -89,9 +89,11 @@ class QuestionDetailActivity : AppCompatActivity(){
             val user = FirebaseAuth.getInstance().currentUser
 
             if (user == null){
+                Log.d("user is ", "null")
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
             }else{
+                Log.d("user is ", "logedin")
                 val intent = Intent(applicationContext, AnswerSendActivity::class.java)
                 intent.putExtra("question",mQuestion)
                 startActivity(intent)

@@ -40,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_below="@+id/sendButton"
         android:layout_centerInParent="true"
         android:visibility="gone"/>

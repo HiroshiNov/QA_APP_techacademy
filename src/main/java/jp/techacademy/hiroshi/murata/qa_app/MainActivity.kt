@@ -93,14 +93,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-
-
     private lateinit var mListView: ListView
     private lateinit var mQuestionArrayList: ArrayList<Question>
 
     private lateinit var mAdapter: QuestionsListAdapter
 
     private var mGenreRef: DatabaseReference? = null
+
+    private var favRef : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,14 +149,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mAdapter.notifyDataSetChanged()
 
         mListView.setOnItemClickListener{ parent, view, position, id ->
-            val intent = Intent(applicationContext, QuestionDetailActivity::class.java)
+            if(favRef != true){
+                val intent = Intent(applicationContext, QuestionDetailActivity::class.java)
 //            Log.d("id","$id")
-            Log.d("mGenre","$mGenre")
-            Log.d("position","$position")
-            intent.putExtra("question", mQuestionArrayList[position])
-            intent.putExtra("genre",mGenre)
-            intent.putExtra("position",position)
-            startActivity(intent)
+                Log.d("mGenre","$mGenre")
+                Log.d("position","$position")
+                intent.putExtra("question", mQuestionArrayList[position])
+                intent.putExtra("genre",mGenre)
+                intent.putExtra("position",position)
+                startActivity(intent)
+            }
         }
 
     }
@@ -209,7 +211,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer.closeDrawer(GravityCompat.START)
 
         if(mGenre == 0){
-
+            favRef = true
             //Get login user
             val user = FirebaseAuth.getInstance().currentUser!!
 
@@ -231,6 +233,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             mGenreRef!!.addChildEventListener(mEventListener)
 
         }else{
+            favRef = false
             mQuestionArrayList.clear()
             mAdapter.setQuestionArrayList(mQuestionArrayList)
             mListView.adapter = mAdapter
